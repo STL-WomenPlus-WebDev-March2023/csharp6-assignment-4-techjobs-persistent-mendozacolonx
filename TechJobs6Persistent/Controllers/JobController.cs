@@ -32,18 +32,6 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult Add()
         {
-            //Back in the JobController, find the Add() method.
-            //This method needs to contain a list of Employer objects which it pulls from the Employers dbContext.
-            //This method needs to create an instance of the AddJobViewModel which is passed the list of employer objects.
-            //Pass an instance of AddJobViewModel to the view.
-            //Example from book:
-            //public IActionResult Add()
-            //{
-            //    List<EventCategory> categories = context.Categories.ToList();
-            //    AddEventViewModel addEventViewModel = new AddEventViewModel(categories);
-
-            //    return View(addEventViewModel);
-            //}
             List<Employer> employers = context.Employers.ToList();
             AddJobViewModel addJobViewModel = new AddJobViewModel(employers);
 
@@ -51,9 +39,24 @@ namespace TechJobs6Persistent.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessAddJobForm()
+        public IActionResult Add(AddJobViewModel addJobViewModel)
         {
-            return View();
+
+            if (ModelState.IsValid)
+            {
+                Job newjob = new Job
+                {
+                    Name = addJobViewModel.jobName,
+                    EmployerId = addJobViewModel.employerId,
+                };
+                context.Jobs.Add(newjob);
+                context.SaveChanges();
+                return RedirectToAction("/Jobs");
+            }
+            else
+            {
+                return View(addJobViewModel);
+            }
         }
 
         public IActionResult Delete()

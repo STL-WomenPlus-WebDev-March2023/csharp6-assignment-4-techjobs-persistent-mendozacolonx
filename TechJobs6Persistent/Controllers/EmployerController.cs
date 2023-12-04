@@ -33,8 +33,8 @@ namespace TechJobs6Persistent.Controllers
         [HttpGet]
         public IActionResult Create() //add method
         {
-            AddEmployerViewModel addEmplyerViewModel = new AddEmployerViewModel();
-            return View(addEmplyerViewModel);
+            AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
+            return View(addEmployerViewModel);
         }
 
         [HttpPost]

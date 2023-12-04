@@ -61,7 +61,7 @@ namespace TechJobs6Persistent.Controllers
         {
             Employer employer = context.Employers.Find(id);
             //add validation for no result?
-            return View();
+            return View(employer);
         }
 
     }

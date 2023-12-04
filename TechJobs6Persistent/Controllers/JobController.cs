@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,20 @@ namespace TechJobs6Persistent.Controllers
 
         public IActionResult Add()
         {
+            //Back in the JobController, find the Add() method.
+            //This method needs to contain a list of Employer objects which it pulls from the Employers dbContext.
+            //This method needs to create an instance of the AddJobViewModel which is passed the list of employer objects.
+            //Pass an instance of AddJobViewModel to the view.
+            //Example from book:
+            //public IActionResult Add()
+            //{
+            //    List<EventCategory> categories = context.Categories.ToList();
+            //    AddEventViewModel addEventViewModel = new AddEventViewModel(categories);
+
+            //    return View(addEventViewModel);
+            //}
             List<Employer> employers = context.Employers.ToList();
-            AddJobViewModel addJobViewModel = new AddJobViewModel(context.Employers.ToList());
+            AddJobViewModel addJobViewModel = new AddJobViewModel(employers);
 
             return View(addJobViewModel);
         }

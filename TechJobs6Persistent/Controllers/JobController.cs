@@ -44,19 +44,19 @@ namespace TechJobs6Persistent.Controllers
 
             if (ModelState.IsValid)
             {
+                Employer employer = context.Employers.Find(addJobViewModel.employerId);
+
                 Job newjob = new Job
                 {
                     Name = addJobViewModel.jobName,
-                    EmployerId = addJobViewModel.employerId,
+                    Employer = employer
                 };
                 context.Jobs.Add(newjob);
                 context.SaveChanges();
-                return RedirectToAction("/Jobs");
+                return Redirect("/Job");
             }
-            else
-            {
-                return View(addJobViewModel);
-            }
+            return View(addJobViewModel);
+            
         }
 
         public IActionResult Delete()
